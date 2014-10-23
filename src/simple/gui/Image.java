@@ -107,7 +107,7 @@ public final class Image {
     public Color get(int x, int y) {
         if (x < 0 || x >= w)  throw new IndexOutOfBoundsException("x must be between 0 and " + (w-1) + ", recieved " + x);
         if (y < 0 || y >= h) throw new IndexOutOfBoundsException("y must be between 0 and " + (h-1) + ", recieved " + y);
-        return new Color(image.getRGB(x, y));
+        return new Color(image.getRGB(x, y), true);
     }
     public Color[] getPixels() {
     	Color[] pixelData = new Color[w*h];
