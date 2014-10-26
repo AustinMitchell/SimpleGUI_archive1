@@ -14,6 +14,14 @@ public class GUIRunWindow extends JFrame{
 		pack();
 		setVisible(true);
 	}
+	public GUIRunWindow(ScreenPanel programToRun, String title) {
+		super(title);
+		setContentPane(programToRun);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
+		pack();
+		setVisible(true);
+	}
 	/*public GUIRunWindow(ScreenPanel programToRun, String title, String iconFilePath) {
 		super(title);
 		setContentPane(programToRun);

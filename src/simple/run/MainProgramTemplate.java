@@ -2,10 +2,14 @@ package simple.run;
 
 @SuppressWarnings("serial")
 public class MainProgramTemplate extends ScreenPanel {
+	// MUST HAVE
+	// This creates a JFrame that contains the Panel (ScreenPanel) running your program
 	public static void main(String[] args) {
 		GUIRunWindow window = new GUIRunWindow(new MainProgramTemplate(), "Program Name", false);
 	}
 	
+	// MUST HAVE
+	// Constructor should CONTAIN NO INITIALIZATION for your program, EXCEPT THE SUPER() CONSTRUCTOR.
 	public MainProgramTemplate() {
 		// Set the size of the screen and frames per second
 		super(500, 500, 30);
@@ -13,14 +17,18 @@ public class MainProgramTemplate extends ScreenPanel {
 	
 	// MUST HAVE
 	// Program initialization should be done here
-	public void initializeProgram() {}
+	public void setup() {}
 	
 	// MUST HAVE
+	// Main loop for the program. Loops everything here.
+	public void loop() {}
+	
+	// RECOMMENDED
 	// All widget updating and any other program updates should be done here
 	// Note all widgets have a designated "Update()" function
 	public void Update() {}
 
-	// MUST HAVE
+	// RECOMMENDED
 	// All widget drawing and any other drawings should be done here
 	// Note all widgets have a designated "Draw()" function
 	public void Draw() {

@@ -10,8 +10,14 @@ public class MainProgramEmptyTemplate extends ScreenPanel {
 		super(500, 500, 30);
 	}
 	
-	public void initializeProgram() {
+	public void setup() {
 		
+	}
+	
+	public void loop() {
+		DrawToScreen();
+		cls();
+		Timer.correctedDelay(DELAY_TIME);
 	}
 	
 	public void Update() {

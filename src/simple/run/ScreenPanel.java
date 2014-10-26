@@ -71,6 +71,7 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 			Keyboard k = new Keyboard();
 			addMouseListener(m);
 			addMouseMotionListener(m);
+			addMouseWheelListener(m);
 			addKeyListener(k);
 			thread.start();
 		}
@@ -86,28 +87,21 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 	
 	public void run() {
 		initializeGraphicWindow();
-		initializeProgram();
+		setup();
 		while(running) {
-			Update();
-			Draw();
+			loop();
 		}
 		System.exit(0);
 	}
 	
 	// Method to initialize main program
-	public abstract void initializeProgram();
-	// all updating is done here
-	public abstract void Update();
-	// all drawing is done here
-	public abstract void Draw();
+	public abstract void setup();
+	// Program loop is setup here
+	public abstract void loop();
 	
 	public void keyTyped(KeyEvent e) {}
-	public void keyPressed(KeyEvent e) {
-		currentKeyCode = e.getKeyCode();
-	}
-	public void keyReleased(KeyEvent e) {
-		currentKeyCode = 0;
-	}
+	public void keyPressed(KeyEvent e) {}
+	public void keyReleased(KeyEvent e) {}
 	
 	// Physically updates the screen and draws whatever is on the buffer
 	protected void DrawToScreen() {
