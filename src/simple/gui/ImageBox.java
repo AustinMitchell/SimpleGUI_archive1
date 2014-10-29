@@ -1,29 +1,41 @@
 package simple.gui;
 
 public class ImageBox extends Widget {
-	Image image;
-	boolean drawCentered;
+	/** Image object to draw. **/
+	protected Image image;
+	/** State to determine whether to draw the image with the center at (x, y) or the corner at (x, y). **/
+	protected boolean drawCentered;
+	/** Angle to draw the image at. Works in terms of radians. Note that if this value is not 0, it will always draw the image rotated and centered even if drawCentered is set to false. **/
+	protected double angle;
 	
+	/** Returns the imageBox's Image object. **/
 	public Image getImage() { return image; }
+	/** Returns the imageBox's angle. **/
+	public double getAngle() { return angle; }
 	
-	public void setImage(Image image_) { image = image_.resize(w, h); }
+	/** Sets the imageBox's Image object. Calls the image's resize() function to scale it to the size of the ImageBox. **/
+	public void setImage(Image newImage) { image = newImage.resize(w, h); }
+	/** Sets whether the image to to be drawn centered to the (x, y) position or at the corner. **/
 	public void setDrawCentered(boolean centered) { drawCentered = centered; }
+	/****/
+	public void setAngle(double newAngle) { angle = newAngle; }
 	
-	@Override
-	public void setSize(int w_, int h_) {
-		super.setSize(w_, h_);
+	/** Sets the imageBox's size, and resizes the Image object as well. **/
+	public void setSize(int newWidth, int newHeight) {
+		super.setSize(newWidth, newHeight);
 		if (image != null)
 			image = image.resize(w, h);
 	}
-	@Override
-	public void setWidth(int w_) { setSize(w_, h); }
-	@Override
-	public void setHeight(int h_) { setSize(w, h_); }
+	/** Sets the imageBox's width, and resizes the Image object as well. **/
+	public void setWidth(int newWidth) { setSize(newWidth, h); }
+	/** Sets the imageBox's height, and resizes the Image object as well. **/
+	public void setHeight(int newHeight) { setSize(w, newHeight); }
 
-	
+	/** Constructor which only takes an Image object. Initial position will be at (0, 0), and the size will be the size of the Image object. **/
 	public ImageBox(Image image_) {
 		this(0, 0, image_);
 	}
+	/** This constructor is the same as ImageBox(Image image_), but it also sets the initial position. **/
 	public ImageBox(int x_, int y_, Image image_) {
 		setLocation(x_, y_);
 		drawCentered = false;
@@ -34,6 +46,7 @@ public class ImageBox extends Widget {
 			setSize(1, 1);
 		}
 	}
+	/** Constructor which sets the imageBox's position and size, and then scales the Image object's size to match the size of the imageBox. **/
 	public ImageBox(int x_, int y_, int w_, int h_, Image image_) {
 		super(x_, y_, w_, h_);
 		drawCentered = false;
@@ -41,14 +54,16 @@ public class ImageBox extends Widget {
 			image = image_.resize(w, h);
 	}
 	
-	@Override
+	/** Updates the state of the imageBox relative to the mouse. **/
 	public void Update() {
 		if (!enabled || !visible) 
 			return;
 		updateClickingState();
 	}
 	
-	@Override
+	/** Draws the imageBox. If drawCentered is true, it will use the (x, y) position of the imageBox as the center point rather than the corner.
+	 * <P>Note that it is up to the programmer to understand that in drawCentered mode, the width and height variables still refer to the overall
+	 * size of the image, rather than the radii. The radius in terms of x or y will respectively be w/2 and h/2. **/
 	public void Draw() {
 		if (!visible) {
 			return;

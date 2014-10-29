@@ -11,24 +11,24 @@ public abstract class ScrollBox extends Widget {
 	public Slider getScrollBar() { return scrollBar; }
 	
 	@Override
-	public void setSize(int w_, int h_) {
-		super.setSize(w_, h_);
+	public void setSize(int newWidth, int newHeight) {
+		super.setSize(newWidth, newHeight);
 		setScrollWidgetPosition();
 	}
 	@Override
-	public void setWidth(int w_) { setSize(w_, h); }
+	public void setWidth(int newWidth) { setSize(newWidth, h); }
 	@Override
-	public void setHeight(int h_) { setSize(w, h_); }
+	public void setHeight(int newHeight) { setSize(w, newHeight); }
 	
 	@Override
-	public void setLocation(int x_, int y_) {
-		super.setLocation(x_, y_);
+	public void setLocation(int newX, int newY) {
+		super.setLocation(newX, newY);
 		setScrollWidgetPosition();
 	}
 	@Override
-	public void setX(int x_) { setLocation(x_, y); }
+	public void setX(int newX) { setLocation(newX, y); }
 	@Override
-	public void setY(int y_) { setLocation(x, y_); 
+	public void setY(int newY) { setLocation(x, newY); 
 	}
 	
 	public ScrollBox() {

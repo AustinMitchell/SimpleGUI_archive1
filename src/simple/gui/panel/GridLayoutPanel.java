@@ -18,9 +18,9 @@ public class GridLayoutPanel extends Panel{
 	public float getBoxHeight() { return boxHeight; }
 	
 	@Override
-	public void setSize(int w_, int h_) {
-		w = w_;
-		h = h_;
+	public void setSize(int newWidth, int newHeight) {
+		w = newWidth;
+		h = newHeight;
 		boxWidth = ((float)w)/cols;
 		boxHeight = ((float)h)/rows;
 		
@@ -53,12 +53,12 @@ public class GridLayoutPanel extends Panel{
 		}
 	}
 	@Override
-	public void setWidth(int w_) {
-		setSize(w_, h);
+	public void setWidth(int newWidth) {
+		setSize(newWidth, h);
 	}
 	@Override
-	public void setHeight(int h_) {
-		setSize(w, h_);
+	public void setHeight(int newHeight) {
+		setSize(w, newHeight);
 	}
 	
 	public GridLayoutPanel(int rows_, int cols_) {

@@ -16,7 +16,7 @@ public class Label extends Widget {
 	public int getNumLines() { return numLinesToDisplay; }	
 	public String getText() { return text; }
 		
-	public void setText(String text_) { text = text_; }
+	public void setText(String newText) { text = newText; }
 	public void setBoxIsDrawable(boolean drawable) { boxIsDrawable = drawable; }
 	
 	@Override

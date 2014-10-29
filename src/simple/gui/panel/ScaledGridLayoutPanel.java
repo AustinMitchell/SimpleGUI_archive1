@@ -30,9 +30,9 @@ public class ScaledGridLayoutPanel extends Panel{
 	public float getBoxHeight() { return boxHeight; }
 	
 	@Override
-	public void setSize(int w_, int h_) {
-		w = w_;
-		h = h_;
+	public void setSize(int newWidth, int newheight) {
+		w = newWidth;
+		h = newheight;
 		boxWidth = ((float)w)/cols;
 		boxHeight = ((float)h)/rows;
 		
@@ -42,21 +42,21 @@ public class ScaledGridLayoutPanel extends Panel{
 		}
 	}
 	@Override
-	public void setWidth(int w_) {
-		setSize(w_, h);
+	public void setWidth(int newWidth) {
+		setSize(newWidth, h);
 	}
 	@Override
-	public void setHeight(int h_) {
-		setSize(w, h_);
+	public void setHeight(int newheight) {
+		setSize(w, newheight);
 	}
 	
-	public void setNextStartingPoint(int startCol_, int startRow_) {
-		startCol = startCol_;
-		startRow = startRow_;
+	public void setNextStartingPoint(int newStartCol, int newStartRow) {
+		startCol = newStartCol;
+		startRow = newStartRow;
 	}
-	public void setNextWidgetSpace(int colSpace_, int rowSpace_) {
-		colSpace = colSpace_;
-		rowSpace = rowSpace_;
+	public void setNextWidgetSpace(int newColSpace, int newRowSpace) {
+		colSpace = newColSpace;
+		rowSpace = newRowSpace;
 	}
 	
 	public ScaledGridLayoutPanel(int rows_, int cols_) {

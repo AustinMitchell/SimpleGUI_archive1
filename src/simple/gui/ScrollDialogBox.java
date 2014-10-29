@@ -13,20 +13,20 @@ public class ScrollDialogBox extends ScrollBox {
 	public ArrayList<String> getLineDisplay() { return lineDisplay; }
 
 	@Override
-	public void setTextFont(Font f_) {
-		super.setTextFont(f_);
+	public void setTextFont(Font newFont) {
+		super.setTextFont(newFont);
 		reformatDisplay();
 	}
 	
 	@Override
-	public void setSize(int w_, int h_) {
-		super.setSize(w_, h_);
+	public void setSize(int newWidth, int newHeight) {
+		super.setSize(newWidth, newHeight);
 		reformatDisplay();
 	}
 	@Override
-	public void setWidth(int w_) { setSize(w_, h); }
+	public void setWidth(int newWidth) { setSize(newWidth, h); }
 	@Override
-	public void setHeight(int h_) { setSize(w, h_); }
+	public void setHeight(int newHeight) { setSize(w, newHeight); }
 	
 	public ScrollDialogBox() {
 		this(0, 0, 10, 10);

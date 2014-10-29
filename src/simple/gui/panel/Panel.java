@@ -14,21 +14,21 @@ public class Panel extends Widget {
 	public Widget getWidget(int widgetID) { return widgetList.get(widgetID); } 
 	public ArrayList<Widget> getWidgets() { return widgetList; }
 	
-	public void setPanelVisible(boolean visible_) { panelVisible = visible_; }
+	public void setPanelVisible(boolean newPanelVisible) { panelVisible = newPanelVisible; }
 	
 	@Override
-	public void setLocation(int x_, int y_) {
-		int diffx = x_ - x;
-		int diffy = y_ - y;
-		super.setLocation(x_, y_);
+	public void setLocation(int newX, int newY) {
+		int diffx = newX - x;
+		int diffy = newY - y;
+		super.setLocation(newX, newY);
 		for (Widget w: widgetList) {
 			w.setLocation(w.getX()+diffx, w.getY()+diffy);
 		}
 	}
 	@Override
-	public void setX(int x_) { setLocation(x_, y); }
+	public void setX(int newX) { setLocation(newX, y); }
 	@Override
-	public void setY(int y_) { setLocation(x, y_); }
+	public void setY(int newY) { setLocation(x, newY); }
 	
 	public Panel() {
 		this(0, 0, 10, 10);

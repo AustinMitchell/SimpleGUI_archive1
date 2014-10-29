@@ -7,16 +7,16 @@ import simple.run.ScreenPanel;
 
 /**
  * Generic Widget class. All widgets inherit from this class.
- * The idea behind widgets is to create interfaceable components to perform tasks. These could be buttons, scrollboxes, textboxes, or possibly panels to contain other widgets.
+ * <P>The idea behind widgets is to create interfaceable components to perform tasks. These could be buttons, scrollboxes, textboxes, or possibly panels to contain other widgets.
  * Many generic widgets are defined here, but the goal behind this class was to create a system to easily allow you to make your own components.
- * Note that if you decide to make your own Widget object, they have access to a DrawObject named draw. Drawing should be done with this object.
- * Widget is an abstract class, as it's meant to be the framework for other widgets. 
+ * <P>Note that if you decide to make your own Widget object, they have access to a DrawObject named draw. Drawing should be done with this object.
+ * <P>Widget is an abstract class, as it's meant to be the framework for other widgets. 
  * @author Austin
  *
  */
 public abstract class Widget {
 	/** Instance of DrawObject used by the entire program. Uses the same Graphics2D object as the ScreenPanel. 
-	 	Only usable by classes which implement Widget. For the main program, use the drawObject for ScreenPanel. **/
+	 * <P>Only usable by classes which implement Widget. For the main program, use the drawObject for ScreenPanel. **/
 	protected static DrawObject draw = new DrawObject(ScreenPanel.getGraphicsObject());
 	
 	/** Height of program window. **/
@@ -116,44 +116,44 @@ public abstract class Widget {
 	public Font getTextFont() { return textFont; }
 
 	/** Sets the widget's x variable **/
-	public void setX(int x_) { x=x_; }
+	public void setX(int newX) { x=newX; }
 	/** Sets the widget's y variable **/
-	public void setY(int y_) { y=y_; }
+	public void setY(int newY) { y=newY; }
 	/** Adds to the widget's x variable **/
-	public void addX(int x_) { setX(x+x_); }
+	public void addX(int ix) { setX(x+ix); }
 	/** Adds to the widget's y variable **/
-	public void addY(int y_) { setY(y+y_); }
+	public void addY(int iy) { setY(y+iy); }
 	/** Sets the widget's x and y variables **/
-	public void setLocation(int x_, int y_) { x=x_; y=y_; }
+	public void setLocation(int newX, int newY) { x=newX; y=newY; }
 	/** Sets the widget's w variable **/
-	public void setWidth(int w_) { w=w_; }
+	public void setWidth(int newWidth) { w=newWidth; }
 	/** Sets the widget's h variable **/
-	public void setHeight(int h_) { h=h_; }
+	public void setHeight(int newHeight) { h=newHeight; }
 	/** Sets the widget's w and h variables **/
-	public void setSize(int w_, int h_) { w=w_; h=h_; }
+	public void setSize(int newWidth, int newHeight) { w=newWidth; h=newHeight; }
 	/** Sets the widget's enabled variable, and sets false for all mouse interaction variables **/
-	public void setEnabled(boolean enabled_) { 
-		enabled = enabled_; 
+	public void setEnabled(boolean newEnabled) { 
+		enabled = newEnabled; 
 		hovering = false;
 		clicking = false;
 		clicked = false;
 	}
 	/** Sets the widget's visble variable, and sets false for all mouse interaction variables **/
-	public void setVisible(boolean visible_) { 
-		visible = visible_;
+	public void setVisible(boolean newVisible) { 
+		visible = newVisible;
 		hovering = false;
 		clicking = false;
 		clicked = false;
 	}
 	
 	/** Sets the widget's fillColor variable **/
-	public void setFillColor(Color c_) { fillColor = c_;}
+	public void setFillColor(Color newFillColor) { fillColor = newFillColor;}
 	/** Sets the widget's borderColor variable **/
-	public void setBorderColor(Color c_) { borderColor = c_; }
+	public void setBorderColor(Color newBorderColor) { borderColor = newBorderColor; }
 	/** Sets the widget's textAreaColor variable **/
-	public void setTextAreaColor(Color c_) { textAreaColor = c_; }
+	public void setTextAreaColor(Color newTextAreaColor) { textAreaColor = newTextAreaColor; }
 	/** Sets the widget's textColor variable **/
-	public void setTextColor(Color c_) { textColor = c_; }
+	public void setTextColor(Color newTextColor) { textColor = newTextColor; }
 	/** Sets all the widget's color variables **/
 	public void setWidgetColors(Color newFillColor, Color newBorderColor, Color newTextAreaColor, Color newTextColor) {
 		setFillColor(newFillColor);
@@ -162,7 +162,7 @@ public abstract class Widget {
 		setTextColor(newTextColor);
 	}
 	/** Sets the widget's textFont variable **/
-	public void setTextFont(Font f_) { textFont = f_; }
+	public void setTextFont(Font newTextFont) { textFont = newTextFont; }
 
 	/** Creates a widget with default dimensions. In some cases, such as a scrollListBox or certain panels, the dimensions are specified by the object rather than directly by the user. **/
 	public Widget() { 

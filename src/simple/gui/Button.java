@@ -2,22 +2,53 @@ package simple.gui;
 
 import java.awt.*;
 
+/** Widget object. Creates a clickable button, intended to be tied to an event. Changes colour according to current widget status.
+ * 
+ * <P> TODO: create functionality for method attachment. **/
 public class Button extends Widget{
-	
+	/** Colour fullness displayed. A value of 1 means the rgb values will be displayed at 100%. A value of 0.5 means rgb values 
+	 * of 50%. **/
 	protected float clrRatio;
+	/** Text displayed at the center of the button. **/
 	protected String text;
+	/** Image displayed on the button's background. **/
 	protected ImageBox imageBox;
 
+	/** Returns the button's text variable. **/
 	public String getText() { return text; }
+	/** Returns the button's Image object of the imageBox variable. **/
 	public Image getImage() { return imageBox.getImage(); }
 	
-	public void setText(String text_) { text = text_; } 
-	public void setImage(Image image_) { imageBox.setImage(image_); }
+	/** Sets the button's text variable. **/
+	public void setText(String newText) { text = newText; } 
+	/** Sets the button's Image object of the imageBox variable**/
+	public void setImage(Image newImage) { imageBox.setImage(newImage); }
 	
-	// This constructor is made to be used for panels with specific layouts, as initial position is irrelevant
+	/** Sets the button's x and y coordinates, as well as shifts the imageBox. **/
+	public void setLocation(int newX, int newY) {
+		super.setLocation(newX, newY);
+		imageBox.setLocation(newX, newY);
+	}
+	/** Sets the button's x coordinate, as well as shifts the imageBox. **/
+	public void setX(int newX) { setLocation(newX, y); }
+	/** Sets the button's y coordinate, as well as shifts the imageBox. **/
+	public void setY(int newY) { setLocation(x, newY); }
+	
+	/** Sets the button's width and height, as well as resizes the imageBox. **/
+	public void setSize(int newWidth, int newHeight) {
+		super.setSize(newWidth, newHeight);
+		imageBox.setSize(newWidth, newHeight);
+	}
+	/** Sets the button's width, as well as resizes the imageBox. **/
+	public void setWidth(int newWidth) { setSize(newWidth, h); }
+	/** Sets the button's height, as well as resizes the imageBox. **/
+	public void setHeight(int newHeight) { setSize(w, newHeight); }
+	
+	/** Creates a button with unspecified position and size, for the case where it's irrelevant. **/
 	public Button(String text_, Image image_) {
 		this(0, 0, 10, 10, text_, image_);
 	}
+	/** Create's a Button object. **/
 	public Button(int x_, int y_, int w_, int h_, String text_, Image image_) {
 		super(x_, y_, w_, h_);
 		text = text_;
@@ -29,14 +60,14 @@ public class Button extends Widget{
 		clrRatio = 0.84f;
 	}
 
-	@Override
+	/** Updates the widget's status. **/
 	public void Update() {
 		if (!enabled || !visible) 
 			return;
 		updateClickingState();
 	}
 	
-	@Override
+	/** Draws the button to the ScreenPanel graphics buffer. **/
 	public void Draw () {
 		if (!visible) 
 			return;

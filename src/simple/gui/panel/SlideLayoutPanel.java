@@ -15,18 +15,18 @@ public class SlideLayoutPanel extends Panel {
 	public void setCurrentSlide(int slideID) { currentSlideID = slideID; }
 	
 	@Override
-	public void setLocation(int x_, int y_) {
-		int diffx = x_ - x;
-		int diffy = y_ - y;
-		super.setLocation(x_, y_);
+	public void setLocation(int newX, int newY) {
+		int diffx = newX - x;
+		int diffy = newY - y;
+		super.setLocation(newX, newY);
 		for (Panel slide: slides) {
 			slide.setLocation(slide.getX()+diffx, slide.getY()+diffy);
 		}
 	}
 	@Override
-	public void setX(int x_) { setLocation(x_, y); }
+	public void setX(int newX) { setLocation(newX, y); }
 	@Override
-	public void setY(int y_) { setLocation(x, y_); }
+	public void setY(int newY) { setLocation(x, newY); }
 	
 	public SlideLayoutPanel() {
 		this(0, 0, 10, 10);
