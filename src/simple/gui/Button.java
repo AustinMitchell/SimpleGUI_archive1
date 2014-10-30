@@ -5,7 +5,7 @@ import java.awt.*;
 /** Widget object. Creates a clickable button, intended to be tied to an event. Changes colour according to current widget status.
  * 
  * <P> TODO: create functionality for method attachment. **/
-public class Button extends Widget{
+public class Button extends Widget {
 	/** Colour fullness displayed. A value of 1 means the rgb values will be displayed at 100%. A value of 0.5 means rgb values 
 	 * of 50%. **/
 	protected float clrRatio;
@@ -13,6 +13,8 @@ public class Button extends Widget{
 	protected String text;
 	/** Image displayed on the button's background. **/
 	protected ImageBox imageBox;
+	/** Allows the button to implement a specified method for drawing. Will be done after drawing the image. **/
+	protected CustomDraw customDrawObject;
 
 	/** Returns the button's text variable. **/
 	public String getText() { return text; }
@@ -23,6 +25,8 @@ public class Button extends Widget{
 	public void setText(String newText) { text = newText; } 
 	/** Sets the button's Image object of the imageBox variable**/
 	public void setImage(Image newImage) { imageBox.setImage(newImage); }
+	/** Sets the button's CustomDraw object. **/
+	public void setCustomDraw(CustomDraw newCustomDrawObject) { customDrawObject = newCustomDrawObject; }
 	
 	/** Sets the button's x and y coordinates, as well as shifts the imageBox. **/
 	public void setLocation(int newX, int newY) {
@@ -59,7 +63,7 @@ public class Button extends Widget{
 
 		clrRatio = 0.84f;
 	}
-
+	
 	/** Updates the widget's status. **/
 	public void Update() {
 		if (!enabled || !visible) 
@@ -87,8 +91,14 @@ public class Button extends Widget{
 		
 		imageBox.Draw();
 
-		FontMetrics fm = draw.getFontMetrics(textFont);
-		draw.getGraphics().setFont(textFont);
-		draw.text(text, x + w/2 - fm.stringWidth(text)/2, y + h/2 + fm.getMaxAscent()/2);
+		if (customDrawObject != null) {
+			customDrawObject.customDraw(this);
+		}
+		
+		if (text != "") {
+			FontMetrics fm = draw.getFontMetrics(textFont);
+			draw.getGraphics().setFont(textFont);
+			draw.text(text, x + w/2 - fm.stringWidth(text)/2, y + h/2 + fm.getMaxAscent()/2);
+		}
 	}
 }

@@ -23,6 +23,21 @@ public class DrawModule {
 		fontColor = newFontColor;
 	}
 	
+	/** Draws a polygon defined by a series of points. The outline is specified by borderColor, the fill by fillColor. 
+	 * @param g			Graphics object to draw to.
+	 * @param x			series of x coordinates of the polygon. 
+	 * @param y			series of y coordinates of the polygon.
+	 * @param numPoints	Number of points to use. **/
+	public static void polygon(Graphics2D g, int[] x, int[] y, int numPoints) {
+		if (fillColor != null) {
+			g.setColor(fillColor);
+			g.fillPolygon(x, y, numPoints);
+		}
+		if (borderColor != null) {
+			g.setColor(borderColor);
+			g.drawPolygon(x, y, numPoints);
+		}
+	}
 	/** Draws a rectangle. The outline is specified by borderColor, the fill by fillColor. 
 	 * @param g			Graphics object to draw to.
 	 * @param x			x coordinate of the bottom left (visually top left) corner. 
@@ -67,6 +82,7 @@ public class DrawModule {
 			g.drawLine(x1, y1, x2, y2);
 		}
 	}
+	
 	
 	/** Draws text on the screen with a given font, with the text starting at the point x, y. This changes the currently set font
 	 * for the given graphics object. 

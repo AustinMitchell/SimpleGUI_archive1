@@ -33,6 +33,10 @@ public class DrawObject {
 		DrawModule.setDrawColors(newFillColor, newBorderColor, newFontColor);
 	}
 	
+	/** Calls the DrawModule's polygon function with the stored Graphics2D object. Refer to DrawModule. **/
+	public void polygon(int[] x, int[] y, int numPoints) {
+		DrawModule.polygon(g, x, y, numPoints);
+	}
 	/** Calls the DrawModule's rect function with the stored Graphics2D object. Refer to DrawModule. **/
 	public void rect(int x, int y, int w, int h) {
 		DrawModule.rect(g, x, y, w, h);

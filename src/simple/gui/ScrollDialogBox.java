@@ -5,9 +5,16 @@ import java.awt.FontMetrics;
 import java.util.ArrayList;
 
 public class ScrollDialogBox extends ScrollBox {
-	ArrayList<String> lines, lineDisplay;	
 	
-	int firstIndex, numLinesToDisplay;
+	/** Raw line data. Each index in lines is made from a call to addLine. **/
+	protected ArrayList<String> lines; 
+	/** Represents the lines list but split up into lines whose width does not exceed the space given for text within the scrollBox. **/
+	protected ArrayList<String> lineDisplay;	
+	
+	/** The first line in lineDisplay to start drawing text from. **/
+	protected int firstIndex;
+	/** Maximum number of lines to draw in the scrollBox **/
+	protected int numLinesToDisplay;
 	
 	public ArrayList<String> getLineData() { return lines; }
 	public ArrayList<String> getLineDisplay() { return lineDisplay; }

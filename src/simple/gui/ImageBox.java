@@ -17,7 +17,7 @@ public class ImageBox extends Widget {
 	public void setImage(Image newImage) { image = newImage.resize(w, h); }
 	/** Sets whether the image to to be drawn centered to the (x, y) position or at the corner. **/
 	public void setDrawCentered(boolean centered) { drawCentered = centered; }
-	/****/
+	/** Sets the angle to draw the imageBox. **/
 	public void setAngle(double newAngle) { angle = newAngle; }
 	
 	/** Sets the imageBox's size, and resizes the Image object as well. **/
@@ -69,19 +69,13 @@ public class ImageBox extends Widget {
 			return;
 		}
 		if (image != null) {
-			if (drawCentered) {
+			if (angle != 0) {
+				draw.imageRotated(this.image, x, y, angle);
+			} else if (drawCentered) {
 				draw.imageCentered(this.image, x, y);
 			} else {
 				draw.image(this.image, x, y);
 			}
-		}
-	}
-	public void DrawRotated(double angle) {
-		if (!visible) {
-			return;
-		}
-		if (image != null) {
-			draw.imageRotated(this.image, x, y, angle);
 		}
 	}
 }

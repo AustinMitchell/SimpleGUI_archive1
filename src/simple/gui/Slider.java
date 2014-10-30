@@ -12,10 +12,10 @@ public class Slider extends Widget {
 	public int getHigh() { return high; }
 	
 	
-	public void setValue(int value_) { value = Math.max(Math.min(value_, high), low); }
-	public void setRange(int low_, int high_) { 
-		low = low_;
-		high = high_;
+	public void setValue(int newValue) { value = Math.max(Math.min(newValue, high), low); }
+	public void setRange(int newLow, int newHigh) { 
+		low = newLow;
+		high = newHigh;
 		setValue(value);
 	}
 	

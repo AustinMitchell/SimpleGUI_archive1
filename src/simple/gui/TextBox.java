@@ -23,8 +23,8 @@ public class TextBox extends Widget implements KeyListener {
 	public int getNumLines() { return numLinesToDisplay; }	
 	public String getText() { return text; }
 	
-	public void setEditable(boolean editable_) { editable = editable_; }
-	public void setText(String text_) { text = text_; }
+	public void setEditable(boolean newEditable) { editable = newEditable; }
+	public void setText(String newText) { text = newText; }
 	
 	@Override
 	public void setSize(int w_, int h_) {

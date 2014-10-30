@@ -46,7 +46,9 @@ public final class Image {
         h = imageToCopy.getHeight();
         image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         filename = imageToCopy.getFileName();
-        setPixels(imageToCopy.getPixels());
+        for (int col = 0; col < w; col++)
+            for (int row = 0; row < h; row++)
+                this.set(col, row, imageToCopy.get(col, row));
     }
     
     /** Creates and image with a default filename using the color data from a BufferedImage. **/
@@ -155,7 +157,7 @@ public final class Image {
     }
     /** Sets all the color data of the image from an aray. Sets column first. **/
     public void setPixels(Color[] pixelData) {
-    	if (w*h-1 != pixelData.length) throw new IndexOutOfBoundsException("number of pixels in pixelData(" + (pixelData.length+1) +") must equal number of pixels in Image Object(" + (w*h) + ").");
+    	if (w*h != pixelData.length) throw new IndexOutOfBoundsException("number of pixels in pixelData(" + pixelData.length +") must equal number of pixels in Image Object(" + (w*h) + ").");
     	for (int x=0; x<w; x++)
     		for (int y=0; y<h; y++)
     			this.set(x, y, pixelData[x*w + y]);	
