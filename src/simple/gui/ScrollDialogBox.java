@@ -16,28 +16,31 @@ public class ScrollDialogBox extends ScrollBox {
 	/** Maximum number of lines to draw in the scrollBox **/
 	protected int numLinesToDisplay;
 	
+	/** Returns raw line data (data that gets converted into displayable lines). **/
 	public ArrayList<String> getLineData() { return lines; }
+	/** Returns display line data (converted from raw line data). **/
 	public ArrayList<String> getLineDisplay() { return lineDisplay; }
 
-	@Override
+	/** Sets the scrollBox's font, as well as reformats the line display **/
 	public void setTextFont(Font newFont) {
 		super.setTextFont(newFont);
 		reformatDisplay();
 	}
-	
-	@Override
+	/** Sets the scrollBox's width and height, as well as reformats the line display **/
 	public void setSize(int newWidth, int newHeight) {
 		super.setSize(newWidth, newHeight);
 		reformatDisplay();
 	}
-	@Override
+	/** Sets the scrollBox's width, as well as reformats the line display **/
 	public void setWidth(int newWidth) { setSize(newWidth, h); }
-	@Override
+	/** Sets the scrollBox's height, as well as reformats the line display **/
 	public void setHeight(int newHeight) { setSize(w, newHeight); }
 	
+	/** Creates a new scrollBox with default size and position. **/
 	public ScrollDialogBox() {
 		this(0, 0, 10, 10);
 	}
+	/** Creates a new scrollBox with given position and size. **/
 	public ScrollDialogBox(int x_, int y_, int w_, int h_) {
 		super(x_, y_, w_, h_);
 		
@@ -48,6 +51,7 @@ public class ScrollDialogBox extends ScrollBox {
 		numLinesToDisplay = (h-4)/(fm.getMaxAscent()+2);
 	}
 	
+	/** Clears the display and adds every line from the raw line data. **/
 	private void reformatDisplay() {
 		FontMetrics fm = draw.getFontMetrics(textFont);
 		numLinesToDisplay = (h-4)/(fm.getMaxAscent()+2);
@@ -57,6 +61,7 @@ public class ScrollDialogBox extends ScrollBox {
 			addLine(s);
 	}
 	
+	/** Adds a line to the raw line data, and splits the line into lines of the correct width. **/
 	public void addLine(String newLine) {
 		lines.add(newLine);
 		
@@ -98,6 +103,7 @@ public class ScrollDialogBox extends ScrollBox {
 		scrollBar.setRange(0, lineDisplay.size()-1);
 	}
 	
+	/** Clears the raw line data and the line display data. **/
 	public void clear() {
 		lines = new ArrayList<String>();
 		lineDisplay = new ArrayList<String>();
@@ -106,7 +112,7 @@ public class ScrollDialogBox extends ScrollBox {
 		lineDisplay = new ArrayList<String>();
 	}
 	
-	@Override
+	/** Updates the scrollBox and scroll widgets, and sets how those widgets interact with the scrollbox. **/
 	public void Update() {
 		if (!enabled || !visible) 
 			return;
@@ -126,7 +132,7 @@ public class ScrollDialogBox extends ScrollBox {
 		}
 	}
 	
-	@Override
+	/** Draws the scrollBox and scroll widgets. **/
 	public void Draw() {
 		if (!visible) 
 			return;

@@ -7,6 +7,7 @@ import java.awt.image.*;
 
 import javax.swing.*;
 
+import simple.gui.DrawModule;
 import simple.gui.DrawObject;
 
 // Main programs must inherit this class. This performs a lot of background action for the main program.
@@ -21,19 +22,8 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 	public static final int MAXHEIGHT = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	public static int WIDTH;
 	public static int HEIGHT;
-	
-	protected static Graphics2D g;
-	public static Graphics2D getGraphicsObject() { return g; }
-	
+		
 	public static DrawObject draw;
-	
-	public static int currentKeyCode;
-	public static boolean hasch() {
-		return currentKeyCode != 0;
-	}
-	public static char getch() {
-		return (char)currentKeyCode;
-	}
 
 	private Thread thread;
 	protected boolean running;
@@ -41,23 +31,36 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 	private BufferedImage image;
 	private JFrame frame;
 			
-	public void quitProgram() { running = false; }
+	public void quit() { running = false; }
+	public void minimize() { frame.setState(Frame.ICONIFIED); }
 	
 	public JFrame getFrame() { return frame; }
 	public void setFrame(JFrame frame_) { frame = frame_; }
-	
-	public ScreenPanel(int width_, int height_, int FPS_, JFrame parentFrame) {
-		this(width_, height_, FPS_);
-		frame = parentFrame;
+	public void setSize(int w, int h) {
+		frame.setSize(w, h);
+		WIDTH = w;
+		HEIGHT = h;
+		DrawModule.setGraphics();
 	}
+	public void setLocation(int x, int y) {
+		frame.setLocation(x, y);
+	}
+	
+	public static void start(ScreenPanel mainProgram, boolean isUndecorated) {
+		mainProgram.setFrame(new GUIRunWindow(mainProgram, "Test", isUndecorated)); 
+	}
+	public static void start(ScreenPanel mainProgram) {
+		mainProgram.setFrame(new GUIRunWindow(mainProgram, "Test", false)); 
+	}
+	
 	public ScreenPanel(int width_, int height_, int FPS_) {
 		super();
-		currentKeyCode = 0;
 		Keyboard.addTypableObject(this);
 		WIDTH = width_;
 		HEIGHT = height_;
 		FPS = FPS_;
 		DELAY_TIME = 1000/FPS;
+		frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setFocusable(true);
 		requestFocus();
@@ -78,10 +81,9 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 	}
 	
 	private void initializeGraphicWindow() {
+		DrawModule.initialize();
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
-		g = (Graphics2D) image.getGraphics();
-		g.setBackground(Color.WHITE);
-		draw = new DrawObject(g);
+		draw = new DrawObject();
 		running = true;
 	}
 	
@@ -106,12 +108,12 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 	// Physically updates the screen and draws whatever is on the buffer
 	protected void DrawToScreen() {
 		Graphics g2 = getGraphics();
-		g2.drawImage(image, 0, 0, null);
+		g2.drawImage(DrawModule.getImage(), 0, 0, null);
 		g2.dispose();
 	}
 	// Made to wipe the screen after drawing is complete
 	protected void cls() {
-		g.setColor(BACKGROUND_COLOR);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		draw.setDrawColors(BACKGROUND_COLOR, null, null);
+		draw.rect(0, 0, WIDTH, HEIGHT);
 	}
 }

@@ -13,8 +13,6 @@ public class Button extends Widget {
 	protected String text;
 	/** Image displayed on the button's background. **/
 	protected ImageBox imageBox;
-	/** Allows the button to implement a specified method for drawing. Will be done after drawing the image. **/
-	protected CustomDraw customDrawObject;
 
 	/** Returns the button's text variable. **/
 	public String getText() { return text; }
@@ -25,8 +23,6 @@ public class Button extends Widget {
 	public void setText(String newText) { text = newText; } 
 	/** Sets the button's Image object of the imageBox variable**/
 	public void setImage(Image newImage) { imageBox.setImage(newImage); }
-	/** Sets the button's CustomDraw object. **/
-	public void setCustomDraw(CustomDraw newCustomDrawObject) { customDrawObject = newCustomDrawObject; }
 	
 	/** Sets the button's x and y coordinates, as well as shifts the imageBox. **/
 	public void setLocation(int newX, int newY) {

@@ -29,7 +29,7 @@ public class TextBox extends Widget implements KeyListener {
 	@Override
 	public void setSize(int w_, int h_) {
 		super.setSize(w_, h_);
-		FontMetrics fm = ScreenPanel.getGraphicsObject().getFontMetrics(textFont);
+		FontMetrics fm = draw.getFontMetrics(textFont);
 		numLinesToDisplay = (h-4)/(fm.getMaxAscent()+2);
 	}
 	@Override
@@ -43,7 +43,7 @@ public class TextBox extends Widget implements KeyListener {
 	@Override
 	public void setTextFont(Font f_) {
 		super.setTextFont(f_);
-		FontMetrics fm = ScreenPanel.getGraphicsObject().getFontMetrics(textFont);
+		FontMetrics fm = draw.getFontMetrics(textFont);
 		numLinesToDisplay = (h-4)/(fm.getMaxAscent()+2);
 	}
 	
@@ -58,7 +58,7 @@ public class TextBox extends Widget implements KeyListener {
 		editable = true;
 		active = false;
 		text = "";
-		FontMetrics fm = ScreenPanel.getGraphicsObject().getFontMetrics(textFont);
+		FontMetrics fm = draw.getFontMetrics(textFont);
 		// We want space of at least 2 pixels above the text and below the text to the border, and 2 pixels between lines
 		numLinesToDisplay = (h-4)/(fm.getMaxAscent()+2);
 	}

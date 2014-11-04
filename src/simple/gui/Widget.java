@@ -17,12 +17,7 @@ import simple.run.ScreenPanel;
 public abstract class Widget {
 	/** Instance of DrawObject used by the entire program. Uses the same Graphics2D object as the ScreenPanel. 
 	 * <P>Only usable by classes which implement Widget. For the main program, use the drawObject for ScreenPanel. **/
-	protected static DrawObject draw = new DrawObject(ScreenPanel.getGraphicsObject());
-	
-	/** Height of program window. **/
-	protected static int WINDOW_WIDTH = ScreenPanel.WIDTH;
-	/** Width of program window. **/
-	protected static int WINDOW_HEIGHT = ScreenPanel.HEIGHT;
+	protected static DrawObject draw = new DrawObject();
 	
 	private static Color DEFAULT_FILLCOLOR = Color.WHITE;
 	private static Color DEFAULT_BORDERCOLOR = Color.BLACK;
@@ -90,6 +85,9 @@ public abstract class Widget {
 	protected Color textColor;
 	/** Widget's current font for rendering text. **/
 	protected Font textFont;
+	
+	/** Allows the button to implement a specified method for drawing. Will be done after drawing the image. **/
+	protected CustomDraw customDrawObject;
 	
 	/** Returns the widget's x variable. **/
 	public int getX() { return x; }
@@ -163,6 +161,9 @@ public abstract class Widget {
 	}
 	/** Sets the widget's textFont variable **/
 	public void setTextFont(Font newTextFont) { textFont = newTextFont; }
+	
+	/** Sets the button's CustomDraw object. **/
+	public void setCustomDraw(CustomDraw newCustomDrawObject) { customDrawObject = newCustomDrawObject; }
 
 	/** Creates a widget with default dimensions. In some cases, such as a scrollListBox or certain panels, the dimensions are specified by the object rather than directly by the user. **/
 	public Widget() { 
