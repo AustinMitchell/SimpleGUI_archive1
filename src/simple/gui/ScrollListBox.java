@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class ScrollListBox<WidgetType extends Widget> extends ScrollBox {
 	private static final int BAR_WIDTH = 20;
 	
-	ArrayList<WidgetType> widgetList; 
-	int numWidgetsToDisplay, firstIndex;
-	float widgetWidth, widgetHeight;
-	boolean widgetColorsDefaultToScrollBox;
+	protected ArrayList<WidgetType> widgetList; 
+	protected int numWidgetsToDisplay, firstIndex;
+	protected float widgetWidth, widgetHeight;
+	protected boolean widgetColorsDefaultToScrollBox;
 	
 	public void setWidgetColorsDefaultToScrollBox(boolean b) { widgetColorsDefaultToScrollBox = b; }
 	
@@ -71,6 +71,24 @@ public class ScrollListBox<WidgetType extends Widget> extends ScrollBox {
 			scrollBar.setRange(0, widgetList.size()-1);
 		}
 		setWidgetPosition();
+	}
+	
+	public void removeWidget(int widgetID) {
+		widgetList.remove(widgetID);
+		if (widgetList.isEmpty()) {
+			firstIndex = -1;
+		} else if (firstIndex >= widgetList.size()-1) {
+			firstIndex -= 1;
+		}
+		if (firstIndex != -1) {
+			setWidgetPosition();
+			scrollBar.setRange(0, widgetList.size()-1);
+		}
+	}
+	
+	public void clear() {
+		widgetList = new ArrayList<WidgetType>();
+		firstIndex = 0;
 	}
 	
 	@Override

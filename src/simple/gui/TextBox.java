@@ -22,9 +22,11 @@ public class TextBox extends Widget implements KeyListener {
 	public boolean isActive() { return active; }
 	public int getNumLines() { return numLinesToDisplay; }	
 	public String getText() { return text; }
+	public boolean isEmpty() { return text.equals(""); }
 	
 	public void setEditable(boolean newEditable) { editable = newEditable; }
 	public void setText(String newText) { text = newText; }
+	public void setActive(boolean newActive) { active = newActive; }
 	
 	@Override
 	public void setSize(int w_, int h_) {
@@ -50,6 +52,9 @@ public class TextBox extends Widget implements KeyListener {
 	public TextBox() {
 		this(0, 0, 10, 10);
 	}
+	public TextBox(String text_) {
+		this(0, 0, 10, 10, text_);
+	}
 	public TextBox(int x_, int y_, int w_, int h_) {
 		super(x_, y_, w_, h_);
 		
@@ -62,6 +67,19 @@ public class TextBox extends Widget implements KeyListener {
 		// We want space of at least 2 pixels above the text and below the text to the border, and 2 pixels between lines
 		numLinesToDisplay = (h-4)/(fm.getMaxAscent()+2);
 	}
+	public TextBox(int x_, int y_, int w_, int h_, String text_) {
+		super(x_, y_, w_, h_);
+		
+		Keyboard.addTypableObject(this);
+		
+		editable = true;
+		active = false;
+		text = text_;
+		FontMetrics fm = draw.getFontMetrics(textFont);
+		// We want space of at least 2 pixels above the text and below the text to the border, and 2 pixels between lines
+		numLinesToDisplay = (h-4)/(fm.getMaxAscent()+2);
+	}
+	
 	
 	@Override
 	public void keyTyped(KeyEvent e) { newKeyCode = e.getKeyChar(); }

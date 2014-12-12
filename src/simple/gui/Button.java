@@ -74,6 +74,8 @@ public class Button extends Widget {
 		
 		if (!enabled) {
 			clrRatio = 0.75f;
+		} else if (blocked) {
+			clrRatio = 0.88f;
 		} else if (isClicking()) {
 			clrRatio = 1;
 		} else if (isHovering()) {

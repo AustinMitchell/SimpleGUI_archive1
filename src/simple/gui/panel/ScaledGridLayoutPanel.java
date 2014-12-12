@@ -16,12 +16,12 @@ public class ScaledGridLayoutPanel extends Panel{
 			h = h_;
 		}
 	}
-	private ArrayList<Rect> coordinateList;
+	protected ArrayList<Rect> coordinateList;
 	
-	private int rows, cols;
-	private float boxWidth, boxHeight;
+	protected int rows, cols;
+	protected float boxWidth, boxHeight;
 	
-	private int startCol, startRow, colSpace, rowSpace;
+	protected int startCol, startRow, colSpace, rowSpace;
 	
 	public int getRows() { return rows; }
 	public int getCols() { return cols; }

@@ -38,6 +38,10 @@ public class DrawObject {
 	public void oval(int x, int y, int w, int h) {
 		DrawModule.oval(x, y, w, h);
 	}
+	/** Calls the DrawModule's tri function. Refer to DrawModule. **/
+	public static void tri(int x1, int y1, int x2, int y2, int x3, int y3) {
+		DrawModule.tri(x1, y1, x2, y2, x3, y3);
+	}
 	/** Calls the DrawModule's line function. Refer to DrawModule. **/
 	public void line(int x1, int y1, int x2, int y2) {
 		DrawModule.line(x1, y1, x2, y2);

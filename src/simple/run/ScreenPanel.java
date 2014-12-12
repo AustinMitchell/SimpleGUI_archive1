@@ -46,11 +46,11 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 		frame.setLocation(x, y);
 	}
 	
-	public static void start(ScreenPanel mainProgram, boolean isUndecorated) {
-		mainProgram.setFrame(new GUIRunWindow(mainProgram, "Test", isUndecorated)); 
+	public static void start(ScreenPanel mainProgram, String name, boolean isUndecorated) {
+		mainProgram.setFrame(new GUIRunWindow(mainProgram, name, isUndecorated)); 
 	}
-	public static void start(ScreenPanel mainProgram) {
-		mainProgram.setFrame(new GUIRunWindow(mainProgram, "Test", false)); 
+	public static void start(ScreenPanel mainProgram, String name) {
+		mainProgram.setFrame(new GUIRunWindow(mainProgram, name, false)); 
 	}
 	
 	public ScreenPanel(int width_, int height_, int FPS_) {
@@ -115,5 +115,11 @@ public abstract class ScreenPanel extends JPanel implements Runnable, KeyListene
 	protected void cls() {
 		draw.setDrawColors(BACKGROUND_COLOR, null, null);
 		draw.rect(0, 0, WIDTH, HEIGHT);
+	}
+	
+	protected void updateView() {
+		DrawToScreen();
+		Timer.correctedDelay(DELAY_TIME);
+		cls();
 	}
 }

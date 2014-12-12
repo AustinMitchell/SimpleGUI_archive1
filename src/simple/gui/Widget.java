@@ -73,7 +73,7 @@ public abstract class Widget {
 	/** Widget's state of visibility. Typically just affects whether the Draw() method does anything or not. **/
 	protected boolean visible;
 	/** Another state of allowed interaction specifically with the mouse. Note the difference between isBlocked and enabled, apparent when you draw a disabled button vs. a blocked button. **/
-	protected boolean isBlocked;
+	protected boolean blocked;
 	
 	/** Widget's current color for filling miscellaneous space occupied with nothing else, and other defined areas. **/
 	protected Color fillColor;
@@ -101,6 +101,8 @@ public abstract class Widget {
 	public boolean isEnabled() { return enabled; }
 	/** Returns the widget's visible variable. **/
 	public boolean isVisible() { return visible; }
+	/** Returns the widget's blocked variable. **/
+	public boolean isBlocked() { return blocked; }
 	
 	/** Returns the widget's fillColor variable **/
 	public Color getFillColor() { return fillColor; }
@@ -142,6 +144,9 @@ public abstract class Widget {
 		hovering = false;
 		clicking = false;
 		clicked = false;
+	}
+	public void blockWidget() { 
+		blocked = true;
 	}
 	
 	/** Sets the widget's fillColor variable **/
@@ -189,7 +194,7 @@ public abstract class Widget {
 		clicking = false;
 		clicked = false;
 		hasEntered = false;
-		isBlocked = false;
+		blocked = false;
 	}
 	
 	/** Returns whether or not this widget intersects with another widget. Overwriting encouraged if alternate behavior is needed. **/
@@ -230,8 +235,8 @@ public abstract class Widget {
 	protected void updateClickingState() {
 		if (clicked) 
 			clicked = false;
-		if (isBlocked) {
-			isBlocked = false;
+		if (blocked) {
+			blocked = false;
 			hovering = false;
 			clicking = false;
 			clicked = false;

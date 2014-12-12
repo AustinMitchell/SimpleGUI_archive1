@@ -94,6 +94,19 @@ public class DrawModule {
 			g.drawOval(x, y, w, h);
 		}
 	}
+	/** Draws a triangle. The outline is specified by borderColor, the fill by fillColor. 
+	 * @param x1			x coordinate of the first point. 
+	 * @param y1			y coordinate of the first point.
+	 * @param x2			x coordinate of the second point. 
+	 * @param y2			y coordinate of the second point. 
+	 * @param x3			x coordinate of the third point. 
+	 * @param y3			y coordinate of the third point.
+	 * */
+	public static void tri(int x1, int y1, int x2, int y2, int x3, int y3) {
+		int[] x = {x1, x2, x3};
+		int[] y = {y1, y2, y3};
+		polygon(x, y, 3);
+	}
 	/** Draws a line between two points. The color is specified by borderColor. 
 	 * @param x1		x coordinate of one end. 
 	 * @param y1		y coordinate of one end. 
